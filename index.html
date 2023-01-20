@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- displays site properly based on user's device -->
+
+  <link
+  rel="icon"
+  type="image/png"
+  sizes="32x32"
+  href="./images/favicon-32x32.png"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+  href="https://fonts.googleapis.com/css2?family=Overpass:wght@300;400;700&display=swap"
+  rel="stylesheet"
+  />
+
+  <title>Frontend Mentor | Interactive rating component</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    :root {
+      --primary: hsl(25, 97%, 53%);
+      --white: hsl(0, 0%, 100%);
+      --dark-blue: hsl(213, 19%, 18%);
+      --dark-blue-ligther: hsl(214, 20%, 23%);
+      --very-dark-blue: hsl(216, 12%, 8%);
+      --light-gray: hsl(217, 12%, 63%);
+      --medium-gray: hsl(216, 12%, 54%);
+    }
+
+    body {
+      background-color: var(--very-dark-blue);
+      color: var(--white);
+      box-sizing: border-box;
+      font-family: "Overpass", sans-serif;
+      font-size: 16px;
+    }
+    /* Components */
+
+    .card {
+      background-color: var(--dark-blue);
+      background: linear-gradient(
+      0deg,
+      var(--dark-blue) 0%,
+      var(--dark-blue-ligther) 100%
+      );
+      min-width: 300px;
+      max-width: 340px;
+      padding: 24px;
+      border-radius: 16px;
+    }
+
+    .card-header {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .card-content h1 {
+      margin-bottom: 0px;
+    }
+
+    .card-footer {
+      margin-top: 16px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .icon {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      border-radius: 100%;
+      background-color: hsla(217, 12%, 63%, 0.151);
+    }
+
+    .icon-star img {
+      width: 15px;
+    }
+
+    .rating {
+      flex: 1;
+      width: 100%;
+    }
+
+    .rating ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .rating ul > li {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .rating-button {
+      border: 0px;
+      border-radius: 100%;
+      background-color: var(--dark-blue-ligther);
+      color: var(--light-gray);
+      transition: all 120ms linear;
+      overflow: hidden;
+    }
+    .rating-button label {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 44px;
+      width: 44px;
+      font-size: 14px;
+      line-height: 12px;
+    }
+    .rating-button label span {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+    .rating-button input {
+      position: absolute;
+      display: none;
+    }
+    .rating-button input:checked + span {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+    .rating-button:hover {
+      background-color: var(--medium-gray);
+      color: var(--white);
+    }
+    .chip {
+      padding: 8px 32px;
+      margin: 4px 0;
+      background-color: var(--primary);
+      border-radius: 32px;
+      font-size: 14px;
+    }
+    .chip-secondary {
+      background-color: hsla(217, 12%, 63%, 0.151);
+      color: var(--primary);
+      font-weight: 300;
+    }
+
+    .tank-you-image {
+      width: 150px;
+      margin-bottom: 16x;
+    }
+    .tank-you-image > img {
+      width: 100%;
+    }
+
+    /* Utilities */
+    .text-medium-gray {
+      color: var(--medium-gray);
+    }
+    .text-light-gray {
+      color: var(--light-gray);
+    }
+    .font-regular {
+      font-weight: 300;
+    }
+    .text-small {
+      font-size: 15px;
+    }
+    .text-large {
+      font-size: 24px;
+    }
+    .text-center {
+      text-align: center;
+    }
+
+    .btn {
+      padding: 12px 16px;
+      text-transform: uppercase;
+      border: 0px;
+      font-size: 13px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 120ms linear;
+    }
+
+    .btn-rounded {
+      border-radius: 20px;
+    }
+
+    .btn-block {
+      display: block;
+      width: 100%;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+    .btn-primary:hover {
+      background-color: var(--white);
+      color: var(--primary);
+    }
+    .items-center {
+      align-items: center;
+    }
+    .hide {
+      display: none;
+    }
+    .block {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <form id="rating-form">
+      <div class="card">
+        <div class="card-header">
+          <span class="icon icon-star">
+            <img src="images/icon-star.svg" alt="Icon" />
+          </span>
+        </div>
+
+        <div class="card-content">
+          <h1 class="text-large">How did we do?</h1>
+          <p class="text-medium-gray font-regular text-small">
+            Please let us know how we did with your support request. All
+            feedback is appreciated to help us improve our offering!
+          </p>
+
+          <div class="rating">
+            <ul>
+              <li>
+                <div class="rating-button">
+                  <label>
+                    <input type="radio" name="rating" value="1">
+                    <span>1</span>
+                  </label>
+                </div>
+              </li>
+              <li>
+                <div class="rating-button"><label><input type="radio" name="rating" value="2"><span>2</span></label></div>
+              </li>
+              <li>
+                <div class="rating-button"><label><input type="radio" name="rating" value="3"><span>3</span></label></div>
+              </li>
+              <li>
+                <div class="rating-button"><label><input type="radio" name="rating" value="4"><span>4</span></label></div>
+              </li>
+              <li>
+                <div class="rating-button"><label><input type="radio" name="rating" value="5"><span>5</span></label></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </form>
+
+      <div class="card-footer">
+        <button class="btn btn-rounded btn-block btn-primary">Submit</button>
+      </div>
+    </div>
+
+    <!-- Final Message -->
+
+    <article id="thanks-card" class="card hide">
+      <div class="card-content items-center">
+        <figure class="tank-you-image">
+          <img src="./images/illustration-thank-you.svg" alt="Thank you" />
+        </figure>
+        <div class="chip chip-secondary">
+          <span id="chip-message"></span>
+        </div>
+
+        <h1 class="text-large">Thank you!</h1>
+        <p class="text-medium-gray font-regular text-small text-center">
+          We appreciated you taking the time to give a rating. If you ecer
+          need more support, don't hesitate to get in touch!
+        </p>
+      </div>
+
+      <div class="card-footer"></div>
+    </article>
+  </main>
+
+  <div class="attribution">
+    Challenge by
+    <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+    >Frontend Mentor</a
+    >. Coded by <a href="#">Your Name Here</a>.
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      const form = document.querySelector("#rating-form");
+      const thanksCard = document.getElementById("thanks-card");
+      const chipMessage = document.getElementById("chip-message");
+
+      form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const ratingValue = formData.get('rating');
+
+        if (!ratingValue) {
+          alert('Please select an option');
+          return;
+        }
+
+        form.classList.add('hide');
+        chipMessage.innerText = `You selected ${ratingValue} out of 5`
+        thanksCard.classList.add('block');
+
+      });
+    });
+  </script>
+</body>
+</html>
